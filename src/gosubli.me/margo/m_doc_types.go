@@ -21,8 +21,8 @@ import (
 	"strings"
 	"time"
 
-	"golang.org/x/tools/go/gcimporter"
-	"golang.org/x/tools/go/types"
+	"gosubli.me/something-borrowed/gcimporter" //"golang.org/x/tools/go/gcimporter"
+	"gosubli.me/something-borrowed/types"      //"golang.org/x/tools/go/types"
 )
 
 var (

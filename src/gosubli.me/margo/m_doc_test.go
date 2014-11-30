@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"os"
 	"path"
 	"testing"
@@ -110,6 +111,7 @@ func TestUsages_Framework(t *testing.T) {
 }
 
 func TestUsages_Import(t *testing.T) {
+	fmt.Println("Test: %v")
 	usageSimple(
 		t,
 		26,
