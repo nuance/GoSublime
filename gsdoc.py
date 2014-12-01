@@ -68,10 +68,12 @@ class GsDocCommand(sublime_plugin.TextCommand):
 							lines.append(d.get('fn', '') + ':' + str(d.get('row', 0) + 1) + ':' + str(d.get('col', 0) + 1))
 						
 						sublime.active_window().show_quick_panel(lines, callback, on_highlight=highlight)
-
+						return
+						
 					elif len(docs) == 1:
 						open(docs[0])
-						
+						return
+
 				elif mode == "hint":
 					s = []
 					for d in docs:
