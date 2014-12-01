@@ -239,7 +239,7 @@ func (w *PkgWalker) Import(parentDir string, name string, conf *PkgConfig) (pkg 
 		if cursor != nil && includeDefault && !foundCursor {
 			f, err := w.parseFile(bp.Dir, cursor.fileName, cursor.src)
 
-			if err != nil {
+			if err != nil && typeVerbose {
 				log.Printf("error parsing cursor package %s: %s\n", cursor.fileName, err)
 			} else {
 				cursor.pos = token.Pos(w.fset.File(f.Pos()).Base()) + token.Pos(cursor.cursorPos)
@@ -403,7 +403,9 @@ func (w *PkgWalker) LookupImport(pkg *types.Package, pkgInfo *types.Info, cursor
 			Row:  fpos.Line - 1,
 			Col:  fpos.Column - 1,
 		})
-		log.Println(fpos)
+		if typeVerbose {
+			log.Println(fpos)
+		}
 	}
 
 	return ret
@@ -556,7 +558,6 @@ func (w *PkgWalker) LookupObjects(pkg *types.Package, pkgInfo *types.Info, curso
 		}
 	}
 	if cursorObj == nil {
-		log.Println("exit 1")
 		return []*Doc{}
 	}
 	kind, err := parserObjKind(cursorObj)
@@ -656,7 +657,9 @@ func (w *PkgWalker) LookupObjects(pkg *types.Package, pkgInfo *types.Info, curso
 			Row:  fpos.Line - 1,
 			Col:  fpos.Column - 1,
 		})
-		log.Println(fpos)
+		if typeVerbose {
+			log.Println(fpos)
+		}
 	}
 	if w.findInfo {
 		if kind == ObjField && fieldTypeObj != nil {
@@ -728,7 +731,9 @@ func (w *PkgWalker) LookupObjects(pkg *types.Package, pkgInfo *types.Info, curso
 			Row:  fpos.Line - 1,
 			Col:  fpos.Column - 1,
 		})
-		log.Println(fpos)
+		if typeVerbose {
+			log.Println(fpos)
+		}
 	}
 
 	return ret
