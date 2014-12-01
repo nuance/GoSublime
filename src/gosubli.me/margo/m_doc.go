@@ -1,6 +1,9 @@
 package main
 
-import "path"
+import (
+	"log"
+	"path/filepath"
+)
 
 type Doc struct {
 	Src  string `json:"src"`
@@ -26,7 +29,7 @@ type mDoc struct {
 
 func (m *mDoc) Call() (interface{}, string) {
 	// get the path from our current filename
-	res := m.findCode([]string{path.Dir(m.Fn)})
+	res := m.findCode([]string{filepath.Dir(m.Fn)})
 	return res, ""
 }
 

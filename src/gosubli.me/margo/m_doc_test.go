@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
-	"path"
+	"path/filepath"
 	"testing"
 
 	"github.com/kr/pretty"
@@ -13,7 +13,7 @@ import (
 func usageSimple(t *testing.T, offset int, output []*Doc) {
 	// get current dir
 	wd, _ := os.Getwd()
-	fn := path.Join(wd, "testing/simple.go")
+	fn := filepath.Join(wd, "testing", "simple.go")
 	dec := &mDoc{
 		Fn:        fn,
 		Src:       nil,
@@ -30,7 +30,7 @@ func usageSimple(t *testing.T, offset int, output []*Doc) {
 func findSimple(t *testing.T, offset int, output []*Doc) {
 	// get current dir
 	wd, _ := os.Getwd()
-	fn := path.Join(wd, "testing/simple.go")
+	fn := filepath.Join(wd, "testing", "simple.go")
 	dec := &mDoc{
 		Fn:        fn,
 		Src:       nil,
@@ -86,7 +86,7 @@ func TestCallBasics_Framework(t *testing.T) {
 		t,
 		115,
 		//[]*Doc{&Doc{Src: "func Println()", Pkg: "fmt", Name: "Println", Kind: "func", Fn: "/usr/local/go/src/pkg/fmt/print.go", Row: 262, Col: 5}},
-		[]*Doc{&Doc{Src: "", Pkg: "fmt", Name: "Println", Kind: "func", Fn: "/fmt/print.go", Row: 262, Col: 5}},
+		[]*Doc{&Doc{Src: "", Pkg: "fmt", Name: "Println", Kind: "func", Fn: "print.go", Row: 262, Col: 5}},
 	)
 }
 
@@ -95,9 +95,9 @@ func TestUsages_StructField(t *testing.T) {
 		t,
 		95,
 		[]*Doc{
-			&Doc{Src: "", Pkg: "testing", Name: "value", Kind: "field", Fn: "testing/simple.go", Row: 5, Col: 1},
-			&Doc{Src: "", Pkg: "testing", Name: "value", Kind: "field", Fn: "testing/simple.go", Row: 10, Col: 3},
-			&Doc{Src: "", Pkg: "testing", Name: "value", Kind: "field", Fn: "testing/simple.go", Row: 11, Col: 15},
+			&Doc{Src: "", Pkg: "testing", Name: "value", Kind: "field", Fn: "simple.go", Row: 5, Col: 1},
+			&Doc{Src: "", Pkg: "testing", Name: "value", Kind: "field", Fn: "simple.go", Row: 10, Col: 3},
+			&Doc{Src: "", Pkg: "testing", Name: "value", Kind: "field", Fn: "simple.go", Row: 11, Col: 15},
 		},
 	)
 }
@@ -106,7 +106,7 @@ func TestUsages_Framework(t *testing.T) {
 	usageSimple(
 		t,
 		115,
-		[]*Doc{&Doc{Src: "", Pkg: "fmt", Name: "Println", Kind: "func", Fn: "testing/simple.go", Row: 11, Col: 5}},
+		[]*Doc{&Doc{Src: "", Pkg: "fmt", Name: "Println", Kind: "func", Fn: "simple.go", Row: 11, Col: 5}},
 	)
 }
 
@@ -115,6 +115,6 @@ func TestUsages_Import(t *testing.T) {
 	usageSimple(
 		t,
 		26,
-		[]*Doc{&Doc{Src: "", Pkg: "testing", Name: "fmt", Kind: "package", Fn: "testing/simple.go", Row: 11, Col: 1}},
+		[]*Doc{&Doc{Src: "", Pkg: "testing", Name: "fmt", Kind: "package", Fn: "simple.go", Row: 11, Col: 1}},
 	)
 }

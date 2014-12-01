@@ -69,6 +69,7 @@ func (m *mDoc) findCode(packages []string) []*Doc {
 		}
 		pkg, err := w.Import("", pkgName, conf)
 		if pkg == nil {
+			log.Printf("pkgName: %v, file: %v, dir: %v\n", pkgName, cursor.fileName, cursor.fileDir)
 			log.Fatalln("error import path", err)
 		}
 		if cursor != nil && (m.FindInfo || m.FindDef || m.FindUse) {
